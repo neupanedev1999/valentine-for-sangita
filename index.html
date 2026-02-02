@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sangita 💖 Valentine</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffb6c9, #ffd1dc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Segoe UI", sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255,255,255,0.9);
+      padding: 30px 20px;
+      border-radius: 22px;
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      opacity: 0.85;
+    }
+
+    .buttons {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 14px 22px;
+      font-size: 16px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.1s ease;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    #yesBtn {
+      background: #22c55e;
+      color: white;
+    }
+
+    #noBtn {
+      background: #ef4444;
+      color: white;
+      position: relative;
+    }
+
+    .hint {
+      margin-top: 15px;
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      font-size: 22px;
+      animation: floatUp linear infinite;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(100vh);
+      }
+      to {
+        transform: translateY(-120vh);
+      }
+    }
+
+    /* Success popup */
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 25px 20px;
+      border-radius: 22px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    .popup-content h2 {
+      margin-bottom: 10px;
+    }
+
+    .popup-content button {
+      background: #111827;
+      color: white;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating hearts -->
+  <script>
+    const hearts = ["💖","💘","💕","💞","❤️"];
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 5 + Math.random() * 7 + "s";
+      heart.style.fontSize = 16 + Math.random() * 24 + "px";
+      heart.style.animationDelay = Math.random() * 5 + "s";
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <div class="container">
+    <h1>Hey Sangita…<br>will you be my Valentine? 💘</h1>
+    <p>I promise smiles, small surprises, and way too much chocolate 🍫😄</p>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 😢</button>
+    </div>
+
+    <div class="hint">Try pressing “No” 😈</div>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2>Yaaay Sangita! 💖</h2>
+      <p>I’m really happy you said yes 🥰<br>
+         Can’t wait to make some cute memories together.</p>
+      <button onclick="closePopup()">Aww ❤️</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.position = "fixed";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("touchstart", function(e){
+      e.preventDefault();
+      moveNoButton();
+    }, { passive: false });
+
+    document.getElementById("yesBtn").addEventListener("click", function() {
+      document.getElementById("popup").style.display = "flex";
+    });
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
